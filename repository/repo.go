@@ -15,7 +15,7 @@ type TodoRepo struct {
 	RedisClient *redis.Client
 }
 
-func Repo(postgresDB *sql.DB, redisClient *redis.Client) *TodoRepo {
+func NewRepo(postgresDB *sql.DB, redisClient *redis.Client) *TodoRepo {
 	return &TodoRepo{
 		PostgresDB:  postgresDB,
 		RedisClient: redisClient,

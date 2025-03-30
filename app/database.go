@@ -3,17 +3,18 @@ package app
 import (
 	"database/sql"
 	"github.com/redis/go-redis/v9"
+	"github.com/rs/zerolog/log"
 )
 
 func DatabaseConnection() (*sql.DB, *redis.Client) {
-	redis, err := NewRedisConnection()
+	newRedis, err := NewRedisConnection()
 	if err != nil {
-		panic(err)
+		log.Fatal().Err(err).Msg("redis connection failed")
 	}
-	postgres, err := NewPostGresConnection()
+	mewPostgres, err := NewPostgresConnection()
 	if err != nil {
-		panic(err)
+		log.Fatal().Err(err).Msg("postgres connection failed")
 	}
-	return postgres, redis
+	return mewPostgres, newRedis
 
 }

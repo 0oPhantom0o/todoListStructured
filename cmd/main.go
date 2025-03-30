@@ -4,13 +4,15 @@ import (
 	"fmt"
 	"todolist/app"
 	"todolist/controller"
+	"todolist/logger"
 	"todolist/logic"
 	"todolist/repository"
 )
 
 func main() {
+	logger.Log()
 	postgres, redis := app.DatabaseConnection()
-	todoRepo := repository.Repo(postgres, redis)
+	todoRepo := repository.NewRepo(postgres, redis)
 
 	todoService := logic.NewTodoService(todoRepo)
 	todoController := controller.NewTodoController(todoService)
